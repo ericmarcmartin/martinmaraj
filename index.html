@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martin Maraj — Tech & Lifestyle Content Creator</title>
+  <meta name="description" content="Tech & Lifestyle Content Creator. Reviews, Java, AI, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #000000;
+      --bg-alt: #2e2e2e;
+      --surface: #1c1c1f;
+      --border: #2c2c30;
+      --muted: #77777e;
+      --text: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --tiktok: #fe2c55;
+      --instagram: #c13584;
+      --radius: 16px;
+      --max-w: 1100px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── UTILITY ─────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    hr.section-divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      width: 100%;
+    }
+
+    /* ─── REVEAL ANIMATION ─────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── NAV ──────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 100px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: #28282d;
+      border-color: #444;
+    }
+
+    /* ─── SECTIONS ──── */
+    section {
+      padding: 60px 0;
+      width: 100%;
+    }
+
+    #hero {
+      background-color: var(--bg-dark);
+      padding-top: 110px;
+      padding-bottom: 60px;
+    }
+
+    #what-i-do {
+      background-color: var(--bg-alt);
+    }
+
+    #links {
+      background-color: var(--bg-dark);
+    }
+
+    #availability {
+      background-color: var(--bg-alt);
+    }
+
+    #contact {
+      background-color: var(--bg-dark);
+      padding-bottom: 80px;
+    }
+
+    /* ─── HERO ─────────────────────────────────── */
+    .hero-name-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      width: 108px;
+      height: 108px;
+    }
+
+    @media (min-width: 640px) {
+      .hero-photo-wrap {
+        width: 124px;
+        height: 124px;
+      }
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      display: block;
+      filter: grayscale(8%) contrast(1.04);
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .hero-name {
+      font-size: clamp(40px, 9vw, 72px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      color: var(--text);
+    }
+
+    .hero-tagline {
+      font-size: clamp(14px, 2.2vw, 16px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: var(--surface);
+      white-space: nowrap;
+    }
+
+    /* ─── SECTION LABELS & HEADINGS ─────────────── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .section-headline {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    /* ─── WHAT I DO ─────────────────────────────── */
+    .do-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .do-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .do-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .do-card:hover {
+      border-color: #444;
+      transform: translateY(-3px);
+    }
+
+    .do-icon {
+      font-size: 26px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .do-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: -0.015em;
+    }
+
+    .do-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ─── LINKS ───────────────────────────────── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .links-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-decoration: none;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    }
+
+    .link-card:hover {
+      background: #242428;
+      border-color: #444;
+      transform: translateY(-3px);
+    }
+
+    .link-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .link-platform {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .platform-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .platform-dot.tiktok { background: var(--tiktok); }
+    .platform-dot.instagram {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+
+    .platform-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .link-arrow {
+      color: var(--muted);
+      font-size: 18px;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .link-card:hover .link-arrow {
+      transform: translate(3px, -3px);
+      color: var(--text);
+    }
+
+    .link-stat {
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .link-stat-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    /* ─── AVAILABILITY ────────────────────────── */
+    .avail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 480px) {
+      .avail-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .avail-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .avail-day {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .avail-time {
+      font-size: clamp(20px, 3.5vw, 26px);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+
+    .avail-note {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .avail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-top: 14px;
+    }
+
+    .avail-badge.green {
+      background: rgba(48, 209, 88, 0.12);
+      color: #30d158;
+    }
+
+    .avail-badge.blue {
+      background: rgba(10, 132, 255, 0.12);
+      color: #0a84ff;
+    }
+
+    .avail-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* ─── CONTACT / CTA ─────────────────────────── */
+    .cta-inner {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-headline {
+      font-size: clamp(30px, 6vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: clamp(14px, 1.8vw, 16px);
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--text);
+      color: var(--bg-dark);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 100px;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .cta-email-btn:hover {
+      opacity: 0.88;
+      transform: scale(1.02);
+    }
+
+    .cta-email-btn svg {
+      flex-shrink: 0;
+    }
+
+    /* ─── FOOTER ──────────────────────────────── */
+    footer {
+      padding: 24px 0;
+      background-color: var(--bg-dark);
+      border-top: 1px solid var(--border);
+    }
+
+    footer .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      footer .container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────── -->
+  <nav>
+    <div class="container">
+      <a href="#hero" class="nav-logo">Martin Maraj</a>
+      <a href="mailto:martinmaraj24@gmail.com" class="nav-cta">Get in Touch</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO SECTION ─────────────────────────── -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text reveal">
+          <div class="hero-name-row">
+            <div class="hero-photo-wrap">
+              <img
+                src="martin.png"
+                alt="Martin Maraj — Tech & Lifestyle Content Creator"
+                class="hero-photo"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+            <h1 class="hero-name">Hello!<br />I'm Martin.</h1>
+          </div>
+          <p class="hero-tagline">
+            Tech and lifestyle content creator — reviewing gadgets, apps, skincare, lifestyle, and all the things I actually use. 🇵🇭 🇺🇸 
+          </p>
+          <div class="hero-tags">
+            <span class="tag">Tech Reviews</span>
+            <span class="tag">Lifestyle</span>
+            <span class="tag">Java &amp; AI</span>
+            <span class="tag">Content Creator</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ─── WHAT I DO SECTION ───────────── -->
+  <section id="what-i-do">
+    <div class="container">
+      <p class="section-label reveal">What I Do</p>
+      <h2 class="section-headline reveal" style="transition-delay: 0.06s;">
+        Creator. Storyteller.<br />Tech Enthusiast.
+      </h2>
+
+      <div class="do-grid">
+
+        <div class="do-card reveal">
+          <span class="do-icon">📦</span>
+          <p class="do-title">Reviews</p>
+          <p class="do-body">Gadgets, apps, skincare, fashion, and everyday carry.</p>
+        </div>
+
+        <div class="do-card reveal" style="transition-delay: 0.08s;">
+          <span class="do-icon">☕</span>
+          <p class="do-title">Java &amp; AI</p>
+          <p class="do-body">I present and talk about Java programming, AI tools, and the future of tech.</p>
+        </div>
+
+        <div class="do-card reveal" style="transition-delay: 0.16s;">
+          <span class="do-icon">🛠</span>
+          <p class="do-title">App Development</p>
+          <p class="do-body">From concept to launch — I design and build modern tools and systems.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ─── LINKS SECTION ────────────────────────── -->
+  <section id="links">
+    <div class="container">
+      <p class="section-label reveal">My Links</p>
+      <h2 class="section-headline reveal" style="transition-delay: 0.06s;">My Works | Find Me Online.</h2>
+
+      <div class="links-grid">
+
+        <a
+          href="http://tiktok.com/@martinmaraj"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal"
+        >
+          <div class="link-card-header">
+            <div class="link-platform">
+              <span class="platform-dot tiktok"></span>
+              <span class="platform-name">TikTok</span>
+            </div>
+            <span class="link-arrow">↗</span>
+          </div>
+          <div>
+            <div class="link-stat">10M+</div>
+            <div class="link-stat-sub">Combined views &nbsp;·&nbsp; 2M+ likes and counting</div>
+          </div>
+        </a>
+
+        <a
+          href="https://instagram.com/martinmaraj"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal"
+          style="transition-delay: 0.1s;"
+        >
+          <div class="link-card-header">
+            <div class="link-platform">
+              <span class="platform-dot instagram"></span>
+              <span class="platform-name">Instagram</span>
+            </div>
+            <span class="link-arrow">↗</span>
+          </div>
+          <div>
+            <div class="link-stat">@martinmaraj</div>
+            <div class="link-stat-sub">Photos, reels &amp; behind the scenes</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ─── AVAILABILITY SECTION ────────── -->
+  <section id="availability">
+    <div class="container">
+      <p class="section-label reveal">Availability</p>
+      <h2 class="section-headline reveal" style="transition-delay: 0.06s;">When to Reach Me.</h2>
+
+      <div class="avail-grid">
+
+        <div class="avail-card reveal">
+          <p class="avail-day">Weekdays</p>
+          <p class="avail-time">10:00 AM<br />— 4:00 PM</p>
+          <p class="avail-note">PH / Hong Kong Time (HKT)</p>
+          <span class="avail-badge green">Responsive</span>
+        </div>
+
+        <div class="avail-card reveal" style="transition-delay: 0.1s;">
+          <p class="avail-day">Weekends</p>
+          <p class="avail-time">24 / 7</p>
+          <p class="avail-note">Always available on weekends</p>
+          <span class="avail-badge blue">Open</span>
+        </div>
+
+      </div>
+      <p style="margin-top: 20px; font-size: 17px; color: var(--muted);">I reply as soon as possible.</p>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ─── CONTACT SECTION ──────────────────────── -->
+  <section id="contact">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="cta-headline">Let's Work<br />Together.</h2>
+        <p class="cta-sub">Brand deals, collaborations, sponsored content — I'm open to it all.</p>
+        <a href="mailto:martinmaraj24@gmail.com" class="cta-email-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          martinmaraj24@gmail.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <span class="footer-name">Martin Maraj</span>
+      <span class="footer-copy">&copy; 2026 — All rights reserved</span>
+    </div>
+  </footer>
+
+  <!-- ─── SCROLL REVEAL ─────────────────────────── -->
+  <script>
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      if (!window.IntersectionObserver) {
+        els.forEach(el => el.classList.add('visible'));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
+      els.forEach(el => io.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
