@@ -28,8 +28,10 @@
       --muted: #77777e;
       --text: #f5f5f7;
       --text-secondary: #a1a1a6;
-      --tiktok: #fe2c55;
-      --instagram: #c13584;
+      --tiktok: #25f4ee;
+      --tiktok-alt: #fe2c55;
+      --instagram: #e1306c;
+      --email: #0a84ff;
       --radius: 16px;
       --max-w: 1100px;
     }
@@ -136,16 +138,20 @@
       background-color: var(--bg-alt);
     }
 
-    #links {
+    #sample-works {
       background-color: var(--bg-dark);
     }
 
-    #availability {
+    #links {
       background-color: var(--bg-alt);
     }
 
-    #contact {
+    #availability {
       background-color: var(--bg-dark);
+    }
+
+    #contact {
+      background-color: var(--bg-alt);
       padding-bottom: 80px;
     }
 
@@ -198,6 +204,7 @@
     .hero-social-links {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 10px;
       margin-top: 12px;
     }
@@ -205,21 +212,48 @@
     .quick-social-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text);
       text-decoration: none;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: 100px;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .quick-social-btn:hover {
-      background: #28282d;
-      border-color: #444;
+    /* TikTok Button Styling */
+    .quick-social-btn.tiktok-btn {
+      border-color: rgba(37, 244, 238, 0.25);
+    }
+    .quick-social-btn.tiktok-btn:hover {
+      background: rgba(37, 244, 238, 0.1);
+      border-color: var(--tiktok);
+      box-shadow: 0 0 12px rgba(37, 244, 238, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Instagram Button Styling */
+    .quick-social-btn.instagram-btn {
+      border-color: rgba(225, 48, 108, 0.25);
+    }
+    .quick-social-btn.instagram-btn:hover {
+      background: rgba(225, 48, 108, 0.1);
+      border-color: var(--instagram);
+      box-shadow: 0 0 12px rgba(225, 48, 108, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Email Button Styling */
+    .quick-social-btn.email-btn {
+      border-color: rgba(10, 132, 255, 0.25);
+    }
+    .quick-social-btn.email-btn:hover {
+      background: rgba(10, 132, 255, 0.1);
+      border-color: var(--email);
+      box-shadow: 0 0 12px rgba(10, 132, 255, 0.25);
       transform: translateY(-2px);
     }
 
@@ -311,6 +345,99 @@
       line-height: 1.65;
     }
 
+    /* ─── SAMPLE WORKS ──────────────────────────── */
+    .works-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 480px) {
+      .works-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .works-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: border-color 0.25s, transform 0.25s;
+      max-width: 320px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .video-card.hidden-video {
+      display: none;
+    }
+
+    .video-card:hover {
+      border-color: #444;
+      transform: translateY(-3px);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 12;
+      max-height: 380px;
+      background: #000;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .expand-btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .expand-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 12px 28px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .expand-btn:hover {
+      background: #28282d;
+      border-color: #444;
+      transform: translateY(-2px);
+    }
+
+    .expand-btn svg {
+      transition: transform 0.3s ease;
+    }
+
+    .expand-btn.active svg {
+      transform: rotate(180deg);
+    }
+
     /* ─── LINKS ───────────────────────────────── */
     .links-grid {
       display: grid;
@@ -362,10 +489,13 @@
       flex-shrink: 0;
     }
 
-    .platform-dot.tiktok { background: var(--tiktok); }
+    .platform-dot.tiktok { 
+      background: linear-gradient(135deg, var(--tiktok), var(--tiktok-alt)); 
+    }
     .platform-dot.instagram {
       background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     }
+    .platform-dot.email { background: var(--email); }
 
     .platform-name {
       font-size: 13px;
@@ -591,13 +721,16 @@
             <h1 class="hero-name">Hello!<br />I'm Martin.</h1>
           </div>
 
-          <!-- Quick Social Links -->
+          <!-- Quick Social & Contact Links -->
           <div class="hero-social-links">
-            <a href="http://tiktok.com/@martinmaraj" target="_blank" rel="noopener noreferrer" class="quick-social-btn">
+            <a href="http://tiktok.com/@martinmaraj" target="_blank" rel="noopener noreferrer" class="quick-social-btn tiktok-btn">
               <span class="platform-dot tiktok"></span> TikTok
             </a>
-            <a href="https://instagram.com/martinmaraj" target="_blank" rel="noopener noreferrer" class="quick-social-btn">
+            <a href="https://instagram.com/martinmaraj" target="_blank" rel="noopener noreferrer" class="quick-social-btn instagram-btn">
               <span class="platform-dot instagram"></span> Instagram
+            </a>
+            <a href="mailto:martinmaraj24@gmail.com" class="quick-social-btn email-btn">
+              <span class="platform-dot email"></span> Email
             </a>
           </div>
 
@@ -643,6 +776,81 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- ─── SAMPLE WORKS SECTION ─────────── -->
+  <section id="sample-works">
+    <div class="container">
+      <p class="section-label reveal">Portfolio</p>
+      <h2 class="section-headline reveal" style="transition-delay: 0.06s;">Sample Works.</h2>
+
+      <div class="works-grid" id="worksGrid">
+
+        <!-- Video 1: tech2.mp4 -->
+        <div class="video-card reveal">
+          <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+              <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        <!-- Video 2: razor.mp4 -->
+        <div class="video-card reveal" style="transition-delay: 0.08s;">
+          <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+              <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/razor.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        <!-- Video 3: tech4.mp4 -->
+        <div class="video-card reveal hidden-video">
+          <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+              <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech4.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        <!-- Video 4: tech3.mp4 -->
+        <div class="video-card reveal hidden-video">
+          <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+              <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech3.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        <!-- Video 5: tech1.mp4 -->
+        <div class="video-card reveal hidden-video">
+          <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+              <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Show More Toggle Button -->
+      <div class="expand-btn-container reveal">
+        <button class="expand-btn" id="toggleWorksBtn">
+          <span id="btnText">Show More Works</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
     </div>
   </section>
 
@@ -755,26 +963,56 @@
     </div>
   </footer>
 
-  <!-- ─── SCROLL REVEAL ─────────────────────────── -->
+  <!-- ─── SCROLL REVEAL & EXPAND SCRIPT ───────────── -->
   <script>
     (function () {
+      // Scroll Reveal logic
       const els = document.querySelectorAll('.reveal');
       if (!window.IntersectionObserver) {
         els.forEach(el => el.classList.add('visible'));
-        return;
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach(el => io.observe(el));
       }
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              e.target.classList.add('visible');
-              io.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-      );
-      els.forEach(el => io.observe(el));
+
+      // Toggle Show More Videos logic
+      const toggleBtn = document.getElementById('toggleWorksBtn');
+      const btnText = document.getElementById('btnText');
+      const hiddenVideos = document.querySelectorAll('.hidden-video');
+      let isExpanded = false;
+
+      toggleBtn.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+
+        hiddenVideos.forEach(card => {
+          if (isExpanded) {
+            card.style.display = 'flex';
+            // Trigger animation
+            setTimeout(() => card.classList.add('visible'), 50);
+          } else {
+            card.style.display = 'none';
+            card.classList.remove('visible');
+          }
+        });
+
+        if (isExpanded) {
+          btnText.textContent = 'Show Less';
+          toggleBtn.classList.add('active');
+        } else {
+          btnText.textContent = 'Show More Works';
+          toggleBtn.classList.remove('active');
+        }
+      });
     })();
   </script>
 
