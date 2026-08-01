@@ -299,6 +299,43 @@
       margin-bottom: 32px;
     }
 
+    /* Header row with arrows for Sample Works */
+    .works-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .works-header .section-headline {
+      margin-bottom: 0;
+    }
+
+    .carousel-nav-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .carousel-arrow {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .carousel-arrow:hover {
+      background: #28282d;
+      border-color: #444;
+      transform: scale(1.05);
+    }
+
     /* ─── WHAT I DO ─────────────────────────────── */
     .do-grid {
       display: grid;
@@ -345,26 +382,25 @@
       line-height: 1.65;
     }
 
-    /* ─── SAMPLE WORKS ──────────────────────────── */
-    .works-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
+    /* ─── SAMPLE WORKS CAROUSEL (HORIZONTAL) ─────── */
+    .works-carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Hide scrollbar Firefox */
     }
 
-    @media (min-width: 480px) {
-      .works-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 900px) {
-      .works-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    .works-carousel::-webkit-scrollbar {
+      display: none; /* Hide scrollbar Chrome/Safari/Edge */
     }
 
     .video-card {
+      flex: 0 0 280px; /* Fixed width for responsive horizontal scroll */
+      scroll-snap-align: start;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -373,13 +409,12 @@
       flex-direction: column;
       position: relative;
       transition: border-color 0.25s, transform 0.25s;
-      max-width: 320px;
-      margin: 0 auto;
-      width: 100%;
     }
 
-    .video-card.hidden-video {
-      display: none;
+    @media (min-width: 640px) {
+      .video-card {
+        flex: 0 0 310px;
+      }
     }
 
     .video-card:hover {
@@ -400,42 +435,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    .expand-btn-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 24px;
-    }
-
-    .expand-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 12px 28px;
-      border-radius: 100px;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-    }
-
-    .expand-btn:hover {
-      background: #28282d;
-      border-color: #444;
-      transform: translateY(-2px);
-    }
-
-    .expand-btn svg {
-      transition: transform 0.3s ease;
-    }
-
-    .expand-btn.active svg {
-      transform: rotate(180deg);
     }
 
     /* ─── LINKS ───────────────────────────────── */
@@ -781,16 +780,28 @@
 
   <hr class="section-divider" />
 
-  <!-- ─── SAMPLE WORKS SECTION ─────────── -->
+  <!-- ─── SAMPLE WORKS SECTION (HORIZONTAL CAROUSEL) ─── -->
   <section id="sample-works">
     <div class="container">
       <p class="section-label reveal">Portfolio</p>
-      <h2 class="section-headline reveal" style="transition-delay: 0.06s;">Sample Works.</h2>
+      
+      <div class="works-header reveal" style="transition-delay: 0.06s;">
+        <h2 class="section-headline">Sample Works.</h2>
+        <div class="carousel-nav-btns">
+          <button class="carousel-arrow" id="scrollPrevBtn" aria-label="Previous Video">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="carousel-arrow" id="scrollNextBtn" aria-label="Next Video">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
 
-      <div class="works-grid" id="worksGrid">
+      <!-- Horizontal Carousel Container -->
+      <div class="works-carousel reveal" id="worksCarousel">
 
         <!-- Video 1: tech2.mp4 -->
-        <div class="video-card reveal">
+        <div class="video-card">
           <div class="video-wrapper">
             <video controls playsinline preload="metadata">
               <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech2.mp4#t=0.1" type="video/mp4" />
@@ -800,7 +811,7 @@
         </div>
 
         <!-- Video 2: razor.mp4 -->
-        <div class="video-card reveal" style="transition-delay: 0.08s;">
+        <div class="video-card">
           <div class="video-wrapper">
             <video controls playsinline preload="metadata">
               <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/razor.mp4#t=0.1" type="video/mp4" />
@@ -810,7 +821,7 @@
         </div>
 
         <!-- Video 3: tech4.mp4 -->
-        <div class="video-card reveal hidden-video">
+        <div class="video-card">
           <div class="video-wrapper">
             <video controls playsinline preload="metadata">
               <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech4.mp4#t=0.1" type="video/mp4" />
@@ -820,7 +831,7 @@
         </div>
 
         <!-- Video 4: tech3.mp4 -->
-        <div class="video-card reveal hidden-video">
+        <div class="video-card">
           <div class="video-wrapper">
             <video controls playsinline preload="metadata">
               <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech3.mp4#t=0.1" type="video/mp4" />
@@ -830,7 +841,7 @@
         </div>
 
         <!-- Video 5: tech1.mp4 -->
-        <div class="video-card reveal hidden-video">
+        <div class="video-card">
           <div class="video-wrapper">
             <video controls playsinline preload="metadata">
               <source src="https://susaocotqrdakjucioeq.supabase.co/storage/v1/object/public/martinmaraj/tech1.mp4#t=0.1" type="video/mp4" />
@@ -839,16 +850,6 @@
           </div>
         </div>
 
-      </div>
-
-      <!-- Show More Toggle Button -->
-      <div class="expand-btn-container reveal">
-        <button class="expand-btn" id="toggleWorksBtn">
-          <span id="btnText">Show More Works</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
       </div>
 
     </div>
@@ -963,7 +964,7 @@
     </div>
   </footer>
 
-  <!-- ─── SCROLL REVEAL & EXPAND SCRIPT ───────────── -->
+  <!-- ─── SCROLL REVEAL & CAROUSEL NAVIGATION SCRIPT ───── -->
   <script>
     (function () {
       // Scroll Reveal logic
@@ -985,34 +986,22 @@
         els.forEach(el => io.observe(el));
       }
 
-      // Toggle Show More Videos logic
-      const toggleBtn = document.getElementById('toggleWorksBtn');
-      const btnText = document.getElementById('btnText');
-      const hiddenVideos = document.querySelectorAll('.hidden-video');
-      let isExpanded = false;
+      // Horizontal Carousel Arrow Navigation
+      const carousel = document.getElementById('worksCarousel');
+      const prevBtn = document.getElementById('scrollPrevBtn');
+      const nextBtn = document.getElementById('scrollNextBtn');
 
-      toggleBtn.addEventListener('click', () => {
-        isExpanded = !isExpanded;
+      if (carousel && prevBtn && nextBtn) {
+        const scrollAmount = 300; // Distance per arrow click
 
-        hiddenVideos.forEach(card => {
-          if (isExpanded) {
-            card.style.display = 'flex';
-            // Trigger animation
-            setTimeout(() => card.classList.add('visible'), 50);
-          } else {
-            card.style.display = 'none';
-            card.classList.remove('visible');
-          }
+        prevBtn.addEventListener('click', () => {
+          carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
 
-        if (isExpanded) {
-          btnText.textContent = 'Show Less';
-          toggleBtn.classList.add('active');
-        } else {
-          btnText.textContent = 'Show More Works';
-          toggleBtn.classList.remove('active');
-        }
-      });
+        nextBtn.addEventListener('click', () => {
+          carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      }
     })();
   </script>
 
