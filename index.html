@@ -31,6 +31,7 @@
       --tiktok: #25f4ee;
       --tiktok-alt: #fe2c55;
       --instagram: #e1306c;
+      --youtube: #ff0000;
       --email: #0a84ff;
       --radius: 16px;
       --max-w: 1100px;
@@ -204,24 +205,41 @@
     .hero-social-links {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-wrap: nowrap;
+      gap: 6px;
       margin-top: 12px;
+      width: 100%;
     }
 
     .quick-social-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 13px;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text);
       text-decoration: none;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 7px 16px;
+      padding: 6px 10px;
       border-radius: 100px;
+      flex: 1 1 0;
+      white-space: nowrap;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (min-width: 640px) {
+      .hero-social-links {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .quick-social-btn {
+        flex: 0 0 auto;
+        font-size: 13px;
+        padding: 7px 16px;
+        gap: 8px;
+      }
     }
 
     /* TikTok Button Styling */
@@ -243,6 +261,17 @@
       background: rgba(225, 48, 108, 0.1);
       border-color: var(--instagram);
       box-shadow: 0 0 12px rgba(225, 48, 108, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* YouTube Button Styling */
+    .quick-social-btn.youtube-btn {
+      border-color: rgba(255, 0, 0, 0.25);
+    }
+    .quick-social-btn.youtube-btn:hover {
+      background: rgba(255, 0, 0, 0.1);
+      border-color: var(--youtube);
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.25);
       transform: translateY(-2px);
     }
 
@@ -446,7 +475,7 @@
 
     @media (min-width: 640px) {
       .links-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -494,6 +523,9 @@
     .platform-dot.instagram {
       background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     }
+    .platform-dot.youtube {
+      background: var(--youtube);
+    }
     .platform-dot.email { background: var(--email); }
 
     .platform-name {
@@ -516,7 +548,7 @@
     }
 
     .link-stat {
-      font-size: clamp(26px, 5vw, 38px);
+      font-size: clamp(24px, 4.5vw, 36px);
       font-weight: 800;
       letter-spacing: -0.03em;
       color: var(--text);
@@ -722,14 +754,17 @@
 
           <!-- Quick Social & Contact Links -->
           <div class="hero-social-links">
+            <a href="mailto:hello@martinmaraj.com" class="quick-social-btn email-btn">
+              <span class="platform-dot email"></span> Email
+            </a>
             <a href="http://tiktok.com/@martinmaraj" target="_blank" rel="noopener noreferrer" class="quick-social-btn tiktok-btn">
               <span class="platform-dot tiktok"></span> TikTok
             </a>
             <a href="https://instagram.com/martinmaraj" target="_blank" rel="noopener noreferrer" class="quick-social-btn instagram-btn">
               <span class="platform-dot instagram"></span> Instagram
             </a>
-            <a href="mailto:hello@martinmaraj.com" class="quick-social-btn email-btn">
-              <span class="platform-dot email"></span> Email
+            <a href="https://www.youtube.com/@MartinMaraj" target="_blank" rel="noopener noreferrer" class="quick-social-btn youtube-btn">
+              <span class="platform-dot youtube"></span> YouTube
             </a>
           </div>
 
@@ -901,6 +936,26 @@
           <div>
             <div class="link-stat">@martinmaraj</div>
             <div class="link-stat-sub">Photos, reels &amp; behind the scenes</div>
+          </div>
+        </a>
+
+        <a
+          href="https://www.youtube.com/@MartinMaraj"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal"
+          style="transition-delay: 0.15s;"
+        >
+          <div class="link-card-header">
+            <div class="link-platform">
+              <span class="platform-dot youtube"></span>
+              <span class="platform-name">YouTube</span>
+            </div>
+            <span class="link-arrow">↗</span>
+          </div>
+          <div>
+            <div class="link-stat">@MartinMaraj</div>
+            <div class="link-stat-sub">Tech reviews, long-form content &amp; guides</div>
           </div>
         </a>
 
